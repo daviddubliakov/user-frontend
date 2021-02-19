@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Table, Space, Button, notification } from "antd";
 import { useHistory } from "react-router-dom";
 
-import { getUsers, deleteUser } from "../../api/API";
+import { getUsers, deleteUser } from "../../api/user";
 
 import useStyles from "../style-pages";
 
@@ -39,6 +39,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchUpdate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const columns = [

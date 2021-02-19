@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Input, Button, notification, Form } from 'antd';
 import { withRouter } from 'react-router-dom';
 
-import { updateUser, getUser } from '../../api/API';
+import { updateUser, getUser } from '../../api/user';
 
 import useStyles from '../style-pages';
 import 'antd/dist/antd.css';
@@ -31,6 +31,7 @@ const UpdateUser = (props) => {
 
   useEffect(() => {
     fetchUpdate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleClick = (values) => {
