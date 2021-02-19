@@ -8,11 +8,12 @@ const useStyles = createUseStyles({
     '& li': {
       padding: '5px 20px !important',
       margin: '0 !important',
-      height: '100% !important'
+      height: '100% !important',
+
+      '&:hover': {
+        backgroundColor: '#1890ff !important',
+      }
     },
-    '& li:hover': {
-      backgroundColor: '#1890ff !important',
-    }
   }
 });
 

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Input, Button, notification } from 'antd';
+import { Input, Button, notification, Form } from 'antd';
 import { withRouter } from 'react-router-dom';
 
-import { addUser, getUser } from '../../api/API';
+import { updateUser, getUser } from '../../api/API';
 
 import useStyles from '../style-pages';
 import 'antd/dist/antd.css';
@@ -10,21 +10,15 @@ import 'antd/dist/antd.css';
 
 const UpdateUser = (props) => {
   const classes = useStyles();
+  const form = Form.useForm()[0];
+  const items = props.location.pathname.split('/');
+  const userId = items[2]
 
-  const [result, setResult] = useState({
-    firstName: '',
-    lastName: '',
-    age: null,
-    avatar: '',
-  });
 
   const fetchUpdate = () => {
-    const items = props.location.pathname.split('/');
-
-    getUser(items[2])
+    getUser(userId)
       .then((res) => {
-        setResult({ ...res.data });
-        console.log(result);
+        form.setFieldsValue(res.data);
       })
       .catch(() => {
         notification.error({
@@ -39,50 +33,58 @@ const UpdateUser = (props) => {
     fetchUpdate();
   }, [])
 
-  const handleClick = () => {
-    addUser(result)
-      .then(() => {
-        setResult({ firstName: '', lastName: '', age: null, avatar: '' })
+  const handleClick = (values) => {
+    updateUser({ ...values, _id: userId })
+      .then((res) => {
+        notification.success({
+          message: 'Update completed!',
+          description: res.data.message,
+          duration: 2,
+        });
       });
-  }
-
-  const handleChange = ({ target: { name, value } }) => {
-    setResult({ ...result, [name]: value });
   }
 
   return (
     <div className={classes.create}>
-      <Input
-        placeholder="First Name"
-        name="firstName"
-        value={result.firstName}
-        onChange={handleChange}
-      />
-      <Input
-        placeholder="Last Name"
-        name="lastName"
-        value={result.lastName}
-        onChange={handleChange}
-      />
-      <Input
-        placeholder="Age"
-        name="age"
-        type="number"
-        value={result.age}
-        onChange={handleChange}
-      />
-      <Input
-        placeholder="Avatar URL"
-        name="avatar"
-        value={result.avatar}
-        onChange={handleChange}
-      />
-      <Button
-        type="primary"
-        onClick={handleClick}
-        danger>
-        Update User
-      </Button>
+      <Form onFinish={handleClick} form={form}>
+        <Form.Item
+          name="firstName"
+          rules={[{ required: true, message: 'First Name is incorrect!' }]}
+        >
+          <Input placeholder="First Name" />
+        </Form.Item>
+
+        <Form.Item
+          name="lastName"
+          rules={[{ required: true, message: 'Last Name is incorrect!' }]}
+        >
+          <Input placeholder="Last Name" />
+        </Form.Item>
+
+        <Form.Item
+          name="age"
+          rules={[{ pattern: /^[0-9]+$/, required: true, message: 'Age is incorrect!', }]}
+        >
+          <Input placeholder="Age" />
+        </Form.Item>
+
+        <Form.Item
+          name="avatar"
+          rules={[{ type: 'url', message: 'Avatar URL is incorrect!' }]}
+        >
+          <Input placeholder="Avatar URL" />
+        </Form.Item>
+
+        <Form.Item>
+          <Button
+            type="primary"
+            htmlType="submit"
+            danger
+          >
+            Update User
+          </Button>
+        </Form.Item>
+      </Form>
     </div>
   );
 }

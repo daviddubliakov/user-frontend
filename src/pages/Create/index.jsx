@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Input, Button, notification } from 'antd';
 
+import { TEXT_ERRORS } from '../../utils/constants';
 import { addUser } from '../../api/API';
 
 import useStyles from '../style-pages';
@@ -28,7 +29,7 @@ const Create = () => {
       })
       .catch(() => {
         notification.error({
-          message: 'Ooops',
+          message: TEXT_ERRORS,
           description: 'Something went wrong...',
           duration: 2,
         });
@@ -69,7 +70,8 @@ const Create = () => {
       <Button
         type="primary"
         onClick={handleClick}
-        danger>
+        danger
+      >
         Create User
       </Button>
     </div>

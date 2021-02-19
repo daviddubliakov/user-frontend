@@ -30,3 +30,9 @@ export const deleteUser = (id) => {
 export const getUser = (id) => {
   return api.get(`/user/${id}`);
 }
+
+export const updateUser = (body) => {
+  return api.put(`/user/${body._id}`, queryString.stringify({
+    ...body
+  }));
+}
