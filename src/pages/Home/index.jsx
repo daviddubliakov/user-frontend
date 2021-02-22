@@ -50,7 +50,7 @@ const Home = () => {
       render: (record) => (
         <Space size="middle">
           <div>
-            {record.avatar.slice(0, 4) === "http" ? (
+            {record.avatar ? (
               <img className="avatar" src={record.avatar} alt="avatar" />
             ) : (
                 <img
