@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import { getUsers, deleteUser } from "../../api/user";
 
-import useStyles from "../style-pages";
+import useStyles from "./style";
 
 const Home = () => {
   const classes = useStyles();
@@ -86,7 +86,7 @@ const Home = () => {
     {
       title: "Age",
       key: "age",
-      width: "15%",
+      width: "60%",
       render: (record) => (
         <Space size="middle">
           <div>{record.age ?? defaultValue}</div>
@@ -113,7 +113,7 @@ const Home = () => {
   ];
 
   return (
-    <div className={classes.home}>
+    <div className={classes.root}>
       <Table
         columns={columns}
         dataSource={state.result}

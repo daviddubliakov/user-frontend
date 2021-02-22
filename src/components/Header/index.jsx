@@ -2,13 +2,13 @@ import React from 'react';
 import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
 
-import useStyles from '../style-component';
+import useStyles from './style';
 
 const Header = () => {
   const classes = useStyles();
 
   return (
-    <Menu className={classes.headerMenu} theme="dark">
+    <Menu className={classes.root} theme="dark">
       <Menu.Item>
         <Link to='/'>Home</Link>
       </Menu.Item>

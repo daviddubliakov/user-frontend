@@ -1,7 +1,7 @@
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
-  headerMenu: {
+  root: {
     display: 'flex',
     padding: '0 70px !important',
 

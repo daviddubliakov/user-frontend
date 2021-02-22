@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 import { updateUser, getUser } from '../../api/user';
 
-import useStyles from '../style-pages';
+import useStyles from './style';
 import 'antd/dist/antd.css';
 
 
@@ -46,7 +46,7 @@ const UpdateUser = (props) => {
   }
 
   return (
-    <div className={classes.create}>
+    <div className={classes.root}>
       <Form onFinish={handleClick} form={form}>
         <Form.Item
           name="firstName"
