@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Table, Space, Button, notification } from "antd";
+import { Table, Space, Button } from "antd";
 import { useHistory } from "react-router-dom";
+
+import { success, error } from '../../components/Notifications/index';
 
 import { getUsers, deleteUser } from "../../api/user";
 
-import useStyles from "../style-pages";
+import useStyles from "./style";
 
 const Home = () => {
   const classes = useStyles();
@@ -20,19 +22,9 @@ const Home = () => {
     deleteUser(id)
       .then((res) => {
         fetchUpdate();
-        notification.success({
-          message: "Deleting completed!",
-          description: res.data.message,
-          duration: 2,
-        });
+        success(res.data.message);
       })
-      .catch(() => {
-        notification.error({
-          message: "Ooops",
-          description: "Something went wrong...",
-          duration: 2,
-        });
-      });
+      .catch(() => error());
   };
 
   const defaultValue = "----";
@@ -86,7 +78,7 @@ const Home = () => {
     {
       title: "Age",
       key: "age",
-      width: "15%",
+      width: "60%",
       render: (record) => (
         <Space size="middle">
           <div>{record.age ?? defaultValue}</div>
@@ -113,7 +105,7 @@ const Home = () => {
   ];
 
   return (
-    <div className={classes.home}>
+    <div className={classes.root}>
       <Table
         columns={columns}
         dataSource={state.result}
