@@ -3,7 +3,7 @@ import { Input, Button, notification, Form } from 'antd';
 
 import { addUser } from '../../api/user';
 
-import useStyles from '../style-pages';
+import useStyles from './style';
 import 'antd/dist/antd.css';
 
 
@@ -29,7 +29,7 @@ const Create = () => {
   }
 
   return (
-    <div className={classes.create}>
+    <div className={classes.root}>
       <Form onFinish={handleClick} form={form}>
         <Form.Item
           name="firstName"
