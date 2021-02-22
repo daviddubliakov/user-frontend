@@ -21,7 +21,7 @@ const Home = () => {
       .then((res) => {
         fetchUpdate();
         notification.success({
-          message: "Deleting completed!",
+          message: "Success!",
           description: res.data.message,
           duration: 2,
         });
