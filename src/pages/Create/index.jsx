@@ -33,14 +33,14 @@ const Create = () => {
       <Form onFinish={handleClick} form={form}>
         <Form.Item
           name="firstName"
-          rules={[{ required: true, message: 'First Name is incorrect!' }]}
+          rules={[{ pattern: /^[a-zA-Zа-яА-Я]+$/, required: true, message: 'First Name is incorrect!' }]}
         >
           <Input placeholder="First Name" />
         </Form.Item>
 
         <Form.Item
           name="lastName"
-          rules={[{ required: true, message: 'Last Name is incorrect!' }]}
+          rules={[{ pattern: /^[a-zA-Zа-яА-Я]+$/, required: true, message: 'Last Name is incorrect!' }]}
         >
           <Input placeholder="Last Name" />
         </Form.Item>
