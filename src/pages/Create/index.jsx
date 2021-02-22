@@ -1,5 +1,5 @@
 import React from 'react';
-import { notification, Form } from 'antd';
+import { Form } from 'antd';
 
 import FormTemplate from '../../components/FormTemplate';
 import { success, error } from '../../components/Notifications/index';
@@ -21,11 +21,9 @@ const Create = () => {
           age: null,
           avatar: null,
         });
-        success(res.data.message)
+        success(res.data.message);
       })
-      .catch(() =>
-        error()
-      );
+      .catch(() => error());
   }
 
   return <FormTemplate

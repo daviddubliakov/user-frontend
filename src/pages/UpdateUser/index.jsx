@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { notification, Form } from 'antd';
+import { Form } from 'antd';
 import { withRouter } from 'react-router-dom';
 
+import { success, error } from '../../components/Notifications/index';
 import FormTemplate from '../../components/FormTemplate';
 
 import { updateUser, getUser } from '../../api/user';
@@ -20,13 +21,7 @@ const UpdateUser = (props) => {
       .then((res) => {
         form.setFieldsValue(res.data);
       })
-      .catch(() => {
-        notification.error({
-          message: 'Ooops',
-          description: 'Something went wrong...',
-          duration: 2,
-        });
-      });
+      .catch(() => error());
   }
 
   useEffect(() => {
@@ -36,18 +31,8 @@ const UpdateUser = (props) => {
 
   const handleClick = (values) => {
     updateUser({ ...values, _id: userId })
-      .then((res) => {
-        notification.success({
-          message: 'Success!',
-          description: res.data.message,
-          duration: 2,
-        });
-        notification.error({
-          message: 'Ooops',
-          description: 'Something went wrong...',
-          duration: 2,
-        });
-      });
+      .then((res) => success(res.data.message))
+      .catch(() => error());
   }
 
   return <FormTemplate
@@ -56,7 +41,7 @@ const UpdateUser = (props) => {
     ageInput={true}
     avatarInput={true}
     onFinishFunc={handleClick}
-    buttonTxt="Create user"
+    buttonTxt="Update user"
     formData={form}
   />
 }
