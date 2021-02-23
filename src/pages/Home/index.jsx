@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Space, Button } from "antd";
+import { Table, Space, Button, Spin } from "antd";
 import { useHistory } from "react-router-dom";
 
 import { success, error } from '../../components/Notifications/index';
@@ -13,9 +13,15 @@ const Home = () => {
   const history = useHistory();
 
   const [state, setState] = useState({ result: [] });
+  const [loading, setLoading] = useState(true);
 
   const fetchUpdate = () => {
-    getUsers().then((res) => setState({ ...state, result: res.data }));
+    getUsers().then((res) => {
+      setState({ ...state, result: res.data });
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+    });
   };
 
   const deleteUserByID = (id) => {
@@ -103,6 +109,14 @@ const Home = () => {
       ),
     },
   ];
+
+  if (loading) {
+    return (
+      <div className={classes.spiner}>
+        <Spin size="large" tip="Loading..."></Spin>
+      </div>
+    );
+  }
 
   return (
     <div className={classes.root}>
